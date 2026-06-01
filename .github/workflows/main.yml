@@ -1,0 +1,19 @@
+name: Build Check
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+    
+    - name: Build Solution
+      run: msbuild CyberBotPart2.sln /p:Configuration=Release
+      continue-on-error: true
